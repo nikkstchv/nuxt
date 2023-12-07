@@ -1,0 +1,346 @@
+stages:
+  - build
+  - deploy
+  - test
+
+.kaniko: &kaniko  # Hidden yaml configuration that defines an anchor named 'job_configuration'
+  image:
+    name: gcr.io/kaniko-project/executor:v1.9.0-debug
+    entrypoint: [""]
+  before_script:
+    - |
+      echo "-----BEGIN CERTIFICATE-----
+      MIIFpzCCA4+gAwIBAgIUEVDw+P0ybbHJ7itpTViOkoPSBIAwDQYJKoZIhvcNAQEL
+      BQAwTjFMMEoGA1UEAwxDZ2l0bGFiLWNlLXdlYmRtcy1hdnRvZG9tLXJ1LWluc3Rh
+      bmNlLXkzc25seW95N210NS5tY3Mud2QuYXZ0b2RvbS5ydTAeFw0yMjAyMjUwNTU0
+      MTVaFw0zMjAyMjMwNTU0MTVaME4xTDBKBgNVBAMMQ2dpdGxhYi1jZS13ZWJkbXMt
+      YXZ0b2RvbS1ydS1pbnN0YW5jZS15M3NubHlveTdtdDUubWNzLndkLmF2dG9kb20u
+      cnUwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQC2uGO4+8jcUVJl7HXM
+      C89mnyrmkmzDUvEMQDCNsPTF8WkBFoqOSNzp6ad6m0unrMDvCw659cYUcxGRxWP4
+      kNOvilJLEzscoEDZU91SF4ViFuF274e8R5AXQmS0AIHq0uVB/yHYPBAwtOtUET6k
+      qmiVpsvqf8LG2Hoqd1tfPZ5Lr9wzt4HWW1naG8oZ/FOFd1lqBbRASoUOZvX3eAt2
+      Zs4BKiHBxdEwQfw3fEhmtnqLZq3Tl6/ZWz2/XapnAaGHJ+BxCT+i8xg/zt6BF0/M
+      XWRqpvqrcEg9xK/uQYEIKzvyByyhB/eDMnqRBOrYMxoqbjyA94CCF9+lYL5jIAmS
+      1ZZrpH7kXLf4efGzGfVDDvmUX3jO+d1+SHhYJ68QFAghjRBtbkc2H8uYwbc5CDbD
+      WFDyPZ8AsFwLIH4n89wOY3rMdvixj3c1m1F70yqh9aemNEmA1feO0/NIQq2F86Bh
+      fUWun+A+b4twep9L/p2JDtyUOdMhp6xAxRTt8ir/OgC714/kl2EmIt6E5a1+Hn26
+      +B+hJ+Wl7wqNYJTBCsoPfrOEjIV6KvoFkUTkcsM/QAMYM+16bfYCJPOYeVCFCYxz
+      P/vOPC4fSLzAd8iX/eoj6Kdsjc4DfTmNTp1IdyvL9x4KV7pd0jYOoXI0BwEOCjSM
+      BfdxeJw/GlDF25SSihA9Gh0mzQIDAQABo30wezBaBgNVHREEUzBRgkNnaXRsYWIt
+      Y2Utd2ViZG1zLWF2dG9kb20tcnUtaW5zdGFuY2UteTNzbmx5b3k3bXQ1Lm1jcy53
+      ZC5hdnRvZG9tLnJ1hwQFvIxdhwQKAAEIMB0GA1UdDgQWBBQmpUYu+8pvE5ZqPuep
+      9/eYZb1MATANBgkqhkiG9w0BAQsFAAOCAgEAAQJjO+0uHxlJQuS6vjnmzrEwSGoR
+      661vuP9JwVrCRMDJoC5K8dgR1eGsy5AJwOVU9XV1Wju7Qim1oHHGWNi8GP5rifOk
+      eAKHG6brhGuMmB9bUxNBAYHMmDqep2ZXtHOMbojE5UiCuuB/7B9RJYteSMiKGEo0
+      h026lLHzrKCTON3L2RCGsgk+laJ1tD498x/KERlC8/Q0WdBRAHf8CJ/MtewkzrFH
+      775hDfjFPTT+qX5TQqS1z790adQBm5k2xu1P7g+SIUwxk9zx5upYi9d96QXNBhwC
+      uLlYFwL/aATOU/WT/A3VYDoZLtekp9eIeNOBp3/JolZnWA/Gis+1sac45MHC9zou
+      f+c3B2UNKccj+obTXtBv4vV3iIqWy+gnmZGEpWuThGP+ttb8nmhO2yZdeO7nEQpx
+      RkOZIRmvkWx+/YVgdTao9/HotAEnZ3GOfWIUl50qGV6QcWm9Fj1uDpQEVYgVD1tp
+      Z8IW7P0aWMke+NcYBFd/nm4CzlsvmyqB//Y4cZ3FNqDAFA920nV5ZlQi/UOHvODr
+      4JWLZfP5c0Exa3zvVi997FAY4zgHIFmH6eE0Y1WXajTrT8DDaAucI7mBhVNhoq3m
+      uz8Cz5oTT84uGuX++ho6kuuxOxRAfzY0uubt5vKqwZeLfC/sVPSgEtYF62JuMvQg
+      L7F3Ni21BmRFnzA=
+      -----END CERTIFICATE-----" >> /kaniko/ssl/certs/additional-ca-cert-bundle.crt
+
+
+build_dev_asc:
+  stage: build
+  <<: *kaniko
+  script:
+    - echo "Build docker image"
+    -  echo "{\"auths\":{\"$DOCKER_REGISTRY\":{\"auth\":\"$(printf "%s:%s" "${DOCKER_USER}" "${DOCKER_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --cache=true
+      --build-arg MODE=prod
+      --build-arg DOMAIN=asc
+      --build-arg BASIC=true
+      --build-arg CDN_URL=https://cdn.ascgroup.ru
+      --build-arg URL_RESIZER=https://cdn.webdms.avtodom.ru
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "$DOCKER_REGISTRY/ecomm/wa-frontend-dev-asc:${CI_COMMIT_SHORT_SHA}"
+  when: manual
+  only:
+    - branches
+  except:
+    - master
+
+build_dev_avtodom:
+  stage: build
+  <<: *kaniko
+  script:
+    - echo "Build docker image"
+    -  echo "{\"auths\":{\"$DOCKER_REGISTRY\":{\"auth\":\"$(printf "%s:%s" "${DOCKER_USER}" "${DOCKER_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --cache=true
+      --build-arg MODE=prod
+      --build-arg DOMAIN=avtodom
+      --build-arg BASIC=true
+      --build-arg CDN_URL=https://cdn.avtodom.ru
+      --build-arg URL_RESIZER=https://cdn.webdms.avtodom.ru
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "$DOCKER_REGISTRY/ecomm/wa-frontend-dev-avtodom:${CI_COMMIT_SHORT_SHA}"
+  when: manual
+  only:
+    - branches
+  except:
+    - master
+
+
+
+build_master_asc:
+  stage: build
+  <<: *kaniko
+  script:
+    - echo "Build docker image"
+    -  echo "{\"auths\":{\"$DOCKER_REGISTRY\":{\"auth\":\"$(printf "%s:%s" "${DOCKER_USER}" "${DOCKER_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --cache=true
+      --build-arg MODE=prod
+      --build-arg DOMAIN=asc
+      --build-arg BASIC=true
+      --build-arg CDN_URL=https://cdn.ascgroup.ru
+      --build-arg URL_RESIZER=https://cdn.webdms.avtodom.ru
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "$DOCKER_REGISTRY/ecomm/wa-frontend-v3-asc:${CI_COMMIT_SHORT_SHA}"
+  only:
+    - master
+
+build_master_avtodom:
+  stage: build
+  <<: *kaniko
+  script:
+    - echo "Build docker image"
+    -  echo "{\"auths\":{\"$DOCKER_REGISTRY\":{\"auth\":\"$(printf "%s:%s" "${DOCKER_USER}" "${DOCKER_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --cache=true
+      --build-arg MODE=prod
+      --build-arg DOMAIN=avtodom
+      --build-arg BASIC=true
+      --build-arg CDN_URL=https://cdn.avtodom.ru
+      --build-arg URL_RESIZER=https://cdn.webdms.avtodom.ru
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "$DOCKER_REGISTRY/ecomm/wa-frontend-v3-avtodom:${CI_COMMIT_SHORT_SHA}"
+  only:
+    - master
+
+build_tag_asc:
+  stage: build
+  <<: *kaniko
+  script:
+    - echo "Build docker image"
+    -  echo "{\"auths\":{\"$DOCKER_REGISTRY\":{\"auth\":\"$(printf "%s:%s" "${DOCKER_USER}" "${DOCKER_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor 
+      --cache=true
+      --build-arg MODE=prod
+      --build-arg DOMAIN=asc
+      --build-arg BASIC=false
+      --build-arg CDN_URL=https://cdn.ascgroup.ru
+      --build-arg URL_RESIZER=https://cdn.webdms.avtodom.ru
+      --context "${CI_PROJECT_DIR}" 
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile" 
+      --destination "$DOCKER_REGISTRY/ecomm/wa-frontend-v3-asc:${CI_COMMIT_TAG}"
+  only:
+    - tags
+
+build_tag_avtodom:
+  stage: build
+  <<: *kaniko
+  script:
+    - echo "Build docker image"
+    -  echo "{\"auths\":{\"$DOCKER_REGISTRY\":{\"auth\":\"$(printf "%s:%s" "${DOCKER_USER}" "${DOCKER_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor 
+      --cache=true
+      --build-arg MODE=prod
+      --build-arg DOMAIN=avtodom
+      --build-arg BASIC=false
+      --build-arg CDN_URL=https://cdn.avtodom.ru
+      --build-arg URL_RESIZER=https://cdn.webdms.avtodom.ru
+      --context "${CI_PROJECT_DIR}" 
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile" 
+      --destination "$DOCKER_REGISTRY/ecomm/wa-frontend-v3-avtodom:${CI_COMMIT_TAG}"
+  only:
+    - tags
+
+
+rollout-neprod.avtodom.ru:
+  stage: deploy
+  image:
+    name: alpine/k8s:1.26.1
+    entrypoint: [""]
+  script:
+    - echo "Rollout dev.avtodom.ru"
+    - export KUBECONFIG=$KUBECONFIG
+    - kubectl set image -n develop deployments/avtodom frontend-service=$DOCKER_REGISTRY/ecomm/wa-frontend-dev-avtodom:${CI_COMMIT_SHORT_SHA}
+  when: manual
+  only:
+    - branches
+  except:
+    - master
+
+rollout-neprod.ascgroup.ru:
+  stage: deploy
+  image:
+    name: alpine/k8s:1.26.1
+    entrypoint: [""]
+  script:
+    - echo "Rollout dev.ascgroup.ru"
+    - export KUBECONFIG=$KUBECONFIG
+    - kubectl set image -n develop deployments/ascgroup frontend-service=$DOCKER_REGISTRY/ecomm/wa-frontend-dev-asc:${CI_COMMIT_SHORT_SHA}
+  when: manual
+  only:
+    - branches
+  except:
+    - master
+
+rollout-test-1.avtodom.ru:
+  stage: deploy
+  image:
+    name: alpine/k8s:1.26.1
+    entrypoint: [""]
+  script:
+    - echo "Rollout dev.avtodom.ru"
+    - export KUBECONFIG=$KUBECONFIG
+    - kubectl set image -n develop deployments/avtodom-test-1 frontend-service=$DOCKER_REGISTRY/ecomm/wa-frontend-dev-avtodom:${CI_COMMIT_SHORT_SHA}
+  when: manual
+  only:
+    - branches
+  except:
+    - master
+
+rollout-test-1.ascgroup.ru:
+  stage: deploy
+  image:
+    name: alpine/k8s:1.26.1
+    entrypoint: [""]
+  script:
+    - echo "Rollout dev.ascgroup.ru"
+    - export KUBECONFIG=$KUBECONFIG
+    - kubectl set image -n develop deployments/ascgroup-test-1 frontend-service=$DOCKER_REGISTRY/ecomm/wa-frontend-dev-asc:${CI_COMMIT_SHORT_SHA}
+  when: manual
+  only:
+    - branches
+  except:
+    - master
+
+rollout-test-2.avtodom.ru:
+  stage: deploy
+  image:
+    name: alpine/k8s:1.26.1
+    entrypoint: [""]
+  script:
+    - echo "Rollout dev.avtodom.ru"
+    - export KUBECONFIG=$KUBECONFIG
+    - kubectl set image -n develop deployments/avtodom-test-2 frontend-service=$DOCKER_REGISTRY/ecomm/wa-frontend-dev-avtodom:${CI_COMMIT_SHORT_SHA}
+  when: manual
+  only:
+    - branches
+  except:
+    - master
+
+rollout-test-2.ascgroup.ru:
+  stage: deploy
+  image:
+    name: alpine/k8s:1.26.1
+    entrypoint: [""]
+  script:
+    - echo "Rollout dev.ascgroup.ru"
+    - export KUBECONFIG=$KUBECONFIG
+    - kubectl set image -n develop deployments/ascgroup-test-2 frontend-service=$DOCKER_REGISTRY/ecomm/wa-frontend-dev-asc:${CI_COMMIT_SHORT_SHA}
+  when: manual
+  only:
+    - branches
+  except:
+    - master
+
+rollout-test-3.avtodom.ru:
+  stage: deploy
+  image:
+    name: alpine/k8s:1.26.1
+    entrypoint: [""]
+  script:
+    - echo "Rollout dev.avtodom.ru"
+    - export KUBECONFIG=$KUBECONFIG
+    - kubectl set image -n develop deployments/avtodom-test-3 frontend-service=$DOCKER_REGISTRY/ecomm/wa-frontend-dev-avtodom:${CI_COMMIT_SHORT_SHA}
+  when: manual
+  only:
+    - branches
+  except:
+    - master
+
+rollout-test-3.ascgroup.ru:
+  stage: deploy
+  image:
+    name: alpine/k8s:1.26.1
+    entrypoint: [""]
+  script:
+    - echo "Rollout dev.ascgroup.ru"
+    - export KUBECONFIG=$KUBECONFIG
+    - kubectl set image -n develop deployments/ascgroup-test-3 frontend-service=$DOCKER_REGISTRY/ecomm/wa-frontend-dev-asc:${CI_COMMIT_SHORT_SHA}
+  when: manual
+  only:
+    - branches
+  except:
+    - master
+
+
+rollout-stage.avtodom.ru:
+  stage: deploy
+  image:
+    name: alpine/k8s:1.26.1
+    entrypoint: [""]
+  script:
+    - echo "Rollout avtodom.ru"
+    - export KUBECONFIG=$KUBECONFIG
+    - kubectl set image -n stage deployments/avtodom-v3 frontend-service=$DOCKER_REGISTRY/ecomm/wa-frontend-v3-avtodom:${CI_COMMIT_SHORT_SHA}
+  when: manual
+  only:
+    - master
+
+rollout-stage.ascgroup.ru:
+  stage: deploy
+  image:
+    name: alpine/k8s:1.26.1
+    entrypoint: [""]
+  script:
+    - echo "Rollout ascgroup.ru"
+    - export KUBECONFIG=$KUBECONFIG
+    - kubectl set image -n stage deployments/ascgroup-v3 frontend-service=$DOCKER_REGISTRY/ecomm/wa-frontend-v3-asc:${CI_COMMIT_SHORT_SHA}
+  when: manual
+  only:
+    - master
+
+rollout-avtodom.ru:
+  stage: deploy
+  image:
+    name: alpine/k8s:1.26.1
+    entrypoint: [""]
+  script:
+    - echo "Rollout avtodom.ru"
+    - export KUBECONFIG=$KUBECONFIG
+    - kubectl set image -n production deployments/avtodom-v3 frontend-service=$DOCKER_REGISTRY/ecomm/wa-frontend-v3-avtodom:${CI_COMMIT_TAG}
+  when: manual
+  only:
+    - tags
+
+rollout-ascgroup.ru:
+  stage: deploy
+  image:
+    name: alpine/k8s:1.26.1
+    entrypoint: [""]
+  script:
+    - echo "Rollout ascgroup.ru"
+    - export KUBECONFIG=$KUBECONFIG
+    - kubectl set image -n production deployments/ascgroup-v3 frontend-service=$DOCKER_REGISTRY/ecomm/wa-frontend-v3-asc:${CI_COMMIT_TAG}
+  when: manual
+  only:
+    - tags
+
+trigger-autotest:
+  stage: test
+  trigger:
+    project: ecomm/autotest

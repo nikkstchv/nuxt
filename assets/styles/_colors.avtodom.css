@@ -1,0 +1,21 @@
+:root {
+  --black: #0D0A19;
+  --blackLight: #474450;
+  --blackLight-rgba: 71, 68, 80;
+  --orange: #FF6B4B;
+  --orange-rgba: 206, 85, 8;
+  --green: #A2F3D9;
+  --grayDark: #9A9EA7;
+  --grayLight: #F5F6F7;
+  --grayMediumLight: #E4E6E8;
+  --grayDolphin: #6D6A77;
+  --error: #FF8181;
+  --valid: #6CB75A;
+  --neonBlue: #2554FF;
+  --neonBlue-rgba: 37, 84, 255;
+  --royalBlue: #5176FF;
+  --marineBlue: #0937DD;
+  --gold: #FC0;
+  --background-color-skeleton: #e7e7e7;
+  --background-color-skeleton-gradient: #fff;
+}

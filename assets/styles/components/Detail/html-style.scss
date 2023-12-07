@@ -1,0 +1,163 @@
+:deep(h2) {
+  @include h5;
+
+  margin: 40px 0 15px;
+
+  @include mq($bp-small-medium) {
+    @include h4;
+
+    margin: 50px 0 20px;
+  }
+
+  @include mq($bp-small) {
+    @include h3;
+
+    margin: 70px 0 20px;
+  }
+
+  @include mq($bp-medium-big) {
+    @include h2;
+  }
+}
+
+:deep(h2:first-child) {
+  margin: 0 0 15px;
+
+  @include mq($bp-small-medium) {
+    margin: 0 0 20px;
+  }
+}
+
+:deep(h3) {
+  @include text_medium_bold;
+
+  margin: 20px 0 10px;
+  color: var(--blackLight);
+
+  @include mq($bp-small-medium) {
+    @include text_big_bold;
+
+    margin: 25px 0 10px;
+  }
+
+  @include mq($bp-small) {
+    @include h4;
+
+    margin: 30px 0 15px;
+  }
+
+  @include mq($bp-medium-big) {
+    @include h3;
+  }
+}
+
+:deep(ul,ol) {
+  @include text_big;
+  padding-left: 20px;
+  margin: 30px 0;
+
+  color: var(--blackLight);
+  list-style: disc;
+}
+
+:deep(li) {
+  @include text_medium_regular;
+  margin-bottom: 10px;
+
+  color: var(--blackLight);
+
+  @include mq($bp-small-medium) {
+    @include text_big_regular;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+}
+
+:deep(li:first-child) {
+  margin-top: 0;
+}
+
+:deep(p) {
+  @include text_medium_regular;
+  margin-bottom: 15px;
+
+  color: var(--blackLight);
+
+  @include mq($bp-small-medium) {
+    @include text_big_regular;
+  }
+}
+
+:deep(p:last-child) {
+  margin-bottom: 0;
+}
+
+:deep(a) {
+  color: var(--neonBlue);
+}
+
+:deep(code) {
+  @include text_big;
+
+  color: var(--royalBlue);
+}
+
+:deep(blockquote) {
+  @include text_big_light;
+  padding-left: 20px;
+  margin: 30px 0;
+
+  font-style: italic;
+  text-indent: 10px;
+  letter-spacing: -1px;
+  border-left: 3px solid var(--grayMediumLight);
+}
+
+:deep(table) {
+  width: 100%;
+  margin: 30px 0;
+  text-align: left;
+  border: 2px solid var(--grayDolphin);
+}
+
+:deep(table tr) {
+  border-bottom: 1px solid var(--grayDolphin);
+}
+
+:deep(table tr:last-child) {
+  border-bottom: 0;
+}
+
+:deep(table th, td) {
+  padding: 10px;
+  border-right: 1px solid var(--grayDolphin);
+}
+
+:deep(table th, td:last-child) {
+  border-right: 0;
+}
+
+:deep(table p) {
+  text-indent: unset;
+}
+
+:deep(table thead th) {
+  @include label_small;
+
+  background: var(--grayLight);
+
+  @include mq($bp-small-medium) {
+    @include label;
+  }
+}
+
+:deep(table tbody td) {
+  @include text_medium;
+
+  color: var(--grayDolphin);
+}
+
+

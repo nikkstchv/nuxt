@@ -1,0 +1,38 @@
+<template>
+  <svg class="icon" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+    <circle class="icon__path" cx="25" cy="26.0421" r="3.64735" />
+    <path class="icon__path" d="M25 13.541V15.6252" />
+    <path class="icon__path" d="M16.1568 17.205L17.6303 18.6785" />
+    <path class="icon__path" d="M27.5824 23.466L33.8433 17.2051" />
+    <path class="icon__path" d="M17.7053 35.4252H32.2947" />
+    <path class="icon__path" d="M37.5052 26.0463H35.421" />
+    <path class="icon__path" d="M14.5791 26.0463H12.4949" />
+    <path
+      class="icon__path"
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M24.4144 7.28433C14.3463 7.70548 6.36521 15.9264 6.24215 26.0025C6.2237 32.0475 9.12622 37.7291 14.0351 41.2568C15.4247 42.2275 17.0838 42.7378 18.7787 42.7158H31.2381C32.8945 42.7406 34.5172 42.2472 35.8796 41.3048C42.6218 36.5146 45.4284 27.8722 42.7871 20.0347C40.1458 12.1972 32.6807 7.01652 24.4144 7.28433Z"
+    />
+  </svg>
+</template>
+
+<script>
+export default {
+  name: 'IconSpeedDashboard',
+}
+</script>
+
+<style lang="scss" scoped>
+.icon {
+  width: 50px;
+  height: 50px;
+  fill: none;
+
+  &__path {
+    stroke: var(--neonBlue);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2.5;
+  }
+}
+</style>

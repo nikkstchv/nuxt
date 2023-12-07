@@ -1,0 +1,74 @@
+.form {
+  z-index: 10;
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  align-items: flex-start;
+  height: 100%;
+  padding: 20px 15px;
+  margin-bottom: 40px;
+
+  @include mq($bp-small-medium) {
+    padding: 20px;
+  }
+
+  @include mq($bp-small) {
+    padding: 60px;
+  }
+
+  &_finally {
+    height: 90%;
+  }
+
+  &__side-panel {
+    padding: 0 !important;
+    &_hidden {
+      overflow: hidden;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 50px;
+  }
+
+  &__close {
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+  }
+
+  &__title {
+    @include h5;
+
+    @include mq($bp-super-small) {
+      @include h4;
+    }
+
+    @include mq($bp-small-medium) {
+      @include h3;
+    }
+  }
+
+  &__text {
+    @include text_medium_regular;
+    margin-bottom: 10px;
+    color: var(--grayDark);
+
+    @include mq($bp-small-medium) {
+      @include text_big_regular;
+    }
+  }
+
+  &__inputs {
+    display: grid;
+    grid-gap: 30px;
+  }
+
+  & :deep(.policy-checkbox) {
+    @include mq($bp-small-medium) {
+      margin: 10px 0;
+    }
+  }
+}

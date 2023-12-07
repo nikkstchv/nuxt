@@ -1,0 +1,30 @@
+<template>
+  <svg class="icon" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="icon__path" d="M45.8327 6.24967H4.16602" />
+    <path class="icon__path" d="M43.75 6.25V31.0042C43.75 33.4417 41.6521 35.4167 39.0625 35.4167H10.9375C8.34792 35.4167 6.25 33.4417 6.25 31.0042V6.25" />
+    <path class="icon__path" d="M27.084 35.417L31.2507 43.7503" />
+    <path class="icon__path" d="M22.9167 35.417L18.75 43.7503" />
+    <path class="icon__path" d="M33.3327 16.667L26.3889 23.6107L22.2223 19.4441L16.666 25.0003" />
+  </svg>
+</template>
+
+<script>
+export default {
+  name: 'IconCarGarage',
+}
+</script>
+
+<style lang="scss" scoped>
+.icon {
+  width: 50px;
+  height: 50px;
+  fill: none;
+
+  &__path {
+    stroke: var(--neonBlue);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2.5;
+  }
+}
+</style>

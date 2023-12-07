@@ -1,0 +1,173 @@
+:deep(h2) {
+  @include h4;
+
+  @include mq($bp-small-medium) {
+    @include h3;
+  }
+
+  @include mq($bp-medium-big) {
+    @include h2;
+  }
+}
+
+:deep(h3) {
+  @include h5;
+
+  @include mq($bp-small-medium) {
+    @include h4;
+  }
+
+  @include mq($bp-medium-big) {
+    @include h3;
+  }
+}
+
+:deep(.video-section) {
+  position: relative;
+  height: 0;
+  padding-top: 25px;
+  padding-bottom: 56.25%;
+}
+
+:deep(.video-section iframe) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+:deep(.image-section) {
+  display: grid;
+  grid-gap: 30px;
+
+  @include mq($bp-small-medium) {
+    grid-gap: 40px;
+  }
+
+  @include mq($bp-small) {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 35px;
+  }
+
+  @include mq($bp-medium) {
+    grid-gap: 40px;
+  }
+}
+
+:deep(.images-section) {
+  display: grid;
+  grid-gap: 20px;
+
+  @include mq($bp-small-medium) {
+    grid-gap: 30px;
+  }
+
+  @include mq($bp-small) {
+    grid-gap: 40px;
+  }
+
+  @include mq($bp-medium) {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 35px;
+  }
+
+  @include mq($bp-big) {
+    grid-gap: 50px;
+  }
+}
+
+:deep(.container) {
+  display: flex;
+  flex-direction: column;
+}
+
+:deep(img) {
+  position: relative;
+}
+
+:deep(.text-block) {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 15px;
+
+  @include mq($bp-small-medium) {
+    grid-gap: 20px;
+  }
+}
+
+:deep(.text-container) {
+  display: grid;
+  grid-gap: 20px;
+
+  @include mq($bp-small) {
+    grid-gap: 50px;
+  }
+
+  @include mq($bp-medium-big) {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 100px;
+  }
+
+}
+
+:deep(p) {
+  @include text_medium_regular;
+  margin-bottom: 20px;
+
+  color: var(--blackLight);
+
+  @include mq($bp-small-medium) {
+    @include text_big_regular;
+  }
+}
+
+:deep(p:last-child) {
+  margin-bottom: 0;
+}
+
+:deep(a) {
+  color: var(--neonBlue);
+}
+
+:deep(button) {
+  @include label_small;
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 10px;
+  align-items: center;
+  width: fit-content;
+  padding: 10.5px 30px;
+  margin-top: 30px;
+  font-weight: 600;
+  color: var(--neonBlue);
+  background: rgba(37, 84, 255, 0.07);
+  border-radius: 4px;
+
+  @include mq($bp-small-medium) {
+    margin-top: 40px;
+  }
+
+  @include mq($bp-medium) {
+    margin-top: 50px;
+  }
+}
+
+:deep(button:hover) {
+  @media (hover: hover) and (pointer: fine) {
+      background: rgba(37, 84, 255, 0.12);
+  }
+}
+
+:deep(ul) {
+  @include text_medium_regular;
+  padding-left: 20px;
+  margin-bottom: 40px;
+
+  line-height: 27px;
+  list-style: disc;
+}
+
+

@@ -1,0 +1,39 @@
+<template>
+  <svg class="icon" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M39.5833 42.7083H10.4167C8.11458 42.7083 6.25 40.8438 6.25 38.5417V19.7917C6.25 17.4896 8.11458 15.625 10.4167 15.625H39.5833C41.8854 15.625 43.75 17.4896 43.75 19.7917V38.5417C43.75 40.8438 41.8854 42.7083 39.5833 42.7083Z"
+      class="icon__path"
+    />
+    <path
+      d="M33.6964 15.6253V11.4587C33.6964 9.15658 31.8318 7.29199 29.5297 7.29199H20.4714C18.1693 7.29199 16.3047 9.15658 16.3047 11.4587V15.6253"
+      class="icon__path"
+    />
+    <path
+      d="M6.25 19.792L19.4812 28.5232C20.1625 28.9732 20.9604 29.2128 21.7771 29.2128H28.2229C29.0396 29.2128 29.8375 28.9732 30.5187 28.5232L43.75 19.792"
+      class="icon__path"
+    />
+  </svg>
+</template>
+
+<script>
+export default {
+  name: 'IconBriefcase',
+}
+</script>
+
+<style lang="scss" scoped>
+.icon {
+  width: 50px;
+  height: 50px;
+  fill: none;
+
+  &__path {
+    stroke: var(--neonBlue);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2.5;
+  }
+}
+</style>

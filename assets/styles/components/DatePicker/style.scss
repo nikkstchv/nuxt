@@ -1,0 +1,133 @@
+.vd-wrapper {
+  //border: 1px solid var(--grayDark);
+  box-sizing: border-box;
+  //border-radius: 4px;
+  width: 100%;
+  height: fit-content;
+
+  //@include mq($bp-small-medium) {
+  //  border: none;
+  //}
+
+  &--inline {
+    box-shadow: none;
+  }
+}
+
+.vd-picker {
+  border-radius: 0;
+  box-shadow: none;
+
+  @include mq(0, $bp-small-medium) {
+    width: 100% !important;
+  }
+}
+
+.vd-picker__table {
+  padding: 0;
+}
+
+.vd-picker__input input {
+  @include text_medium_regular;
+  max-height: 100px;
+
+  padding: 15px 15px;
+  font-size: 14px !important;
+  color: var(--black);
+
+  &::placeholder {
+    @include text_medium_regular;
+
+    color: var(--grayDark);
+    opacity: 1;
+  }
+}
+
+.vd-picker-header {
+  background-color: var(--blackLight) !important;
+  border-color: var(--blackLight) !important;
+}
+
+.vd-picker__table-week {
+  font-weight: 700;
+  color: var(--black) !important;
+}
+
+.vd-picker__table-day {
+  @include text_medium_regular;
+
+  &--selected {
+    color: var(--blackLight) !important;
+
+    & .vd-picker__table-day__effect {
+      background-color: var(--blackLight);
+    }
+  }
+
+  &__effect {
+    background-color: transparent;
+    border: 1px solid var(--blackLight);
+    border-radius: 4px;
+    opacity: 1 !important;
+  }
+
+  &:hover {
+    color: inherit !important;
+  }
+
+  &__current {
+    border: none;
+    border-radius: 0;
+
+    & ~ .vd-picker__table-day__text {
+      color: var(--orange) !important;
+    }
+  }
+}
+
+.vd-picker__controls-next {
+  order: 2;
+  padding: 0 !important;
+}
+
+.vd-picker__controls-prev {
+  order: 1;
+  padding: 0 !important;
+}
+
+.vd-picker__controls-wrapper {
+  display: grid;
+  grid-template-columns: minmax(90px, min-content) 1fr;
+  grid-auto-flow: column;
+}
+
+.vd-picker__controls-label button {
+  @include label;
+}
+
+//.vd-picker__table-day--selected  {
+//  color: ;
+//}
+
+.vd-picker__title {
+  justify-content: flex-end;
+  border-radius: 0;
+
+  & p {
+    display: none;
+  }
+}
+
+.vd-picker--bottomsheet {
+  box-shadow: 0 -6px 20px rgb(13 10 25 / 10%);
+}
+
+.vd-menu__content--bottomsheet {
+  border-radius: 0;
+}
+
+.vd-overlay__inner {
+  background-color: inherit !important;
+  border-color: inherit !important;
+  opacity: 1 !important;
+}

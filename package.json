@@ -1,0 +1,56 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "NODE_OPTIONS='--max-old-space-size=8192' nuxt build",
+    "build-local": "nuxt build",
+    "dev": "nuxt dev --port 3005",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore . --fix",
+    "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore --fix",
+    "lint": "yarn lint:js && yarn lint:style",
+    "prepare": "husky install"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@commitlint/parse": "^17.7.0",
+    "@nuxt/image-edge": "^1.0.0-27919678.2f5b64b",
+    "@nuxtjs/eslint-config-typescript": "^11.0.0",
+    "@nuxtjs/stylelint-module": "^5.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
+    "@zadigetvoltaire/nuxt-gtm": "^0.0.13",
+    "eslint": "^8.26.0",
+    "husky": "^8.0.3",
+    "nuxt": "3.2.3",
+    "nuxt-lodash": "^2.4.1",
+    "postcss-html": "^1.5.0",
+    "sass": "^1.55.0",
+    "stylelint": "^15.5.0",
+    "stylelint-config-recess-order": "^3.0.0",
+    "stylelint-config-recommended-scss": "^8.0.0",
+    "stylelint-config-recommended-vue": "^1.4.0",
+    "stylelint-config-standard": "^34.0.0",
+    "typescript": "4.5.5",
+    "vite-plugin-stylelint": "^5.1.1"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.4.3",
+    "@vuepic/vue-datepicker": "^5.4.0",
+    "click-outside-vue3": "^4.0.1",
+    "maska": "^2.1.10",
+    "photo-sphere-viewer": "^4.8.1",
+    "qrcode.vue": "^3.4.0",
+    "swiper": "^7.4.1",
+    "vue-skeletor": "^1.0.6",
+    "vue-yandex-maps": "^1.0.7",
+    "vue3-popper": "^1.5.0"
+  }
+}

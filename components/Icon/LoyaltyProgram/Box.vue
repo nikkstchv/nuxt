@@ -1,0 +1,75 @@
+<template>
+  <svg
+    class="icon"
+    :class="{ icon_disable: disable }"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      class="icon__element"
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M21.0041 8.08734V19.0029C21.0041 20.1079 20.1083 21.0037 19.0033 21.0037H4.99742C3.89239 21.0037 2.99658 20.1079 2.99658 19.0029V8.08734C2.9962 7.81603 3.051 7.54748 3.15765 7.29801L4.4782 4.20772C4.79395 3.47226 5.5176 2.99573 6.31797 2.99622H17.6827C18.4838 2.99622 19.2076 3.47409 19.5225 4.21072L20.843 7.29801C20.9495 7.54753 21.0043 7.81605 21.0041 8.08734Z"
+      stroke="#5176FF"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      class="icon__element"
+      d="M2.99658 7.99838H20.9941"
+      stroke="#5176FF"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      class="icon__element"
+      d="M14.0011 2.99622L15.0015 7.9983V11.2246C14.9768 11.6757 14.5924 12.0221 14.1412 12H9.85938C9.40818 12.0221 9.02379 11.6757 8.99902 11.2246V7.9983L9.99944 2.99622"
+      stroke="#5176FF"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      class="icon__element"
+      d="M5.99756 18.0025H7.99839"
+      stroke="#5176FF"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+</template>
+
+<script>
+export default {
+  name: 'IconBox',
+  props: {
+    disable: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: none;
+
+  &_disable {
+    .icon__element {
+      stroke: var(--grayDark);
+    }
+  }
+
+  &__element {
+    stroke: var(--royalBlue);
+  }
+}
+</style>

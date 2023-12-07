@@ -1,0 +1,37 @@
+@mixin formStyles {
+  display: grid;
+  grid-gap: 40px;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+
+  @media (min-width: $bp-small + 1) and (max-width: $bp-medium) {
+    //padding-top: 265px;
+  }
+
+  @media (min-width: $bp-small-medium + 1) and (max-width: $bp-small) {
+    grid-gap: 40px;
+    max-width: 290px;
+    //padding-top: 220px;
+  }
+
+  @media (min-width: $bp-super-small) and (max-width: $bp-small-medium) {
+    grid-gap: 30px;
+    max-width: 290px;
+    //padding-top: 216px;
+  }
+
+  @media (max-width: $bp-super-small) {
+    grid-gap: 30px;
+    max-width: 290px;
+    //padding-top: 96px;
+  }
+}
+
+@mixin title {
+  @include h3;
+
+  @media (max-width: $bp-super-small) {
+    @include h4;
+  }
+}

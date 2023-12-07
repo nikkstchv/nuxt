@@ -1,0 +1,60 @@
+<template>
+  <svg
+    class="icon"
+    viewBox="0 0 30 30"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      class="icon__path"
+      d="M15 3.75C21.2275 3.75 26.25 8.7725 26.25 15C26.25 21.2275 21.2275 26.25 15 26.25"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      class="icon__path"
+      d="M15 26.25C8.7725 26.25 3.75 21.2275 3.75 15C3.75 8.7725 8.7725 3.75 15 3.75"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      class="icon__path"
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M12.7101 5.07499C9.09761 11.1062 9.09761 18.895 12.7101 24.9262C13.7676 26.6925 16.2339 26.6925 17.2914 24.9262C20.9039 18.895 20.9039 11.1062 17.2914 5.07499C16.2326 3.30874 13.7676 3.30874 12.7101 5.07499Z"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      class="icon__path"
+      d="M5.01245 9.82251C11.1275 11.7113 18.8725 11.7113 24.9862 9.82251"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      class="icon__path"
+      d="M24.9874 20.1775C18.8724 18.2887 11.1274 18.2887 5.01367 20.1775"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+</template>
+
+<script>
+export default {
+  name: 'IconWorld',
+}
+</script>
+
+<style lang="scss" scoped>
+.icon {
+  width: 30px;
+  height: 30px;
+  fill: none;
+
+  &__path {
+    stroke: var(--black);
+    stroke-width: 1.5px;
+  }
+}
+</style>

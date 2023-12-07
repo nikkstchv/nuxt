@@ -1,0 +1,78 @@
+<template>
+  <svg
+    class="icon"
+    :class="{ icon_disable: disable }"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      class="icon__element"
+      d="M16.5029 13.8C17.3248 13.9384 18.1646 13.9317 18.9841 13.78C19.6353 13.6378 20.3079 13.9027 20.6872 14.4508C21.0664 14.9988 21.0774 15.7216 20.715 16.2809C20.4039 16.7321 20.0523 17.154 19.6645 17.5413C19.2286 17.9751 18.753 18.367 18.2438 18.7117"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      class="icon__element"
+      d="M5.06738 6.13735C5.42581 5.52509 5.8557 4.95758 6.34802 4.44675C6.75409 4.02879 7.19599 3.6472 7.66867 3.30637C8.22504 2.92414 8.95804 2.91901 9.51971 3.29341C10.0814 3.66781 10.3587 4.34636 10.2199 5.00697C10.0446 5.98829 10.065 6.99459 10.2799 7.96801"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      class="icon__element"
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M12.1845 10.2214L13.7775 11.8154C14.3085 12.3469 14.4747 13.1422 14.2011 13.8419L11.8698 19.8033C11.6848 20.2759 11.3181 20.6547 10.8518 20.855C10.3855 21.0554 9.85831 21.0606 9.38812 20.8695C6.54649 19.7116 4.29235 17.4559 3.13629 14.6136C2.94521 14.1432 2.95032 13.616 3.15049 13.1494C3.35065 12.6829 3.72922 12.3158 4.20173 12.1302L10.1593 9.79746C10.8586 9.52363 11.6537 9.69005 12.1845 10.2214Z"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      class="icon__element"
+      d="M14.3019 12.8597C14.5854 12.9461 14.8771 13.0031 15.1723 13.0298C15.9043 13.1085 16.5245 13.6038 16.7631 14.3003L18.2138 18.5918C18.3719 19.0689 18.1306 19.5865 17.6635 19.7722C15.7322 20.5706 13.6036 20.7625 11.5605 20.3224"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      class="icon__element"
+      d="M3.68663 12.4396C3.28431 10.5496 3.41947 8.58473 4.07679 6.76762C4.24561 6.27334 4.78288 6.0092 5.27738 6.17738L9.75961 7.69795C10.4077 7.90283 10.8891 8.44964 11.0102 9.11845C11.0379 9.31597 11.0848 9.51031 11.1503 9.6987"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+</template>
+
+<script>
+export default {
+  name: 'IconCroissant',
+  props: {
+    disable: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: none;
+
+  &_disable {
+    .icon__element {
+      stroke: var(--grayDark);
+    }
+  }
+
+  &__element {
+    stroke: var(--royalBlue);
+  }
+}
+</style>

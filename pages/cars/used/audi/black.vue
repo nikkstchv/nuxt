@@ -1,0 +1,37 @@
+<template>
+  <CatalogMainLayout
+    :type-of-transport="[initData.transportType.code]"
+    :condition="initData.condition.code"
+    :mark="initData.mark && initData.mark.code"
+    :mark-name="initData.mark && initData.mark.name"
+    :ext-color-group="initData.extColorGroup.code"
+    :init-cards="cards"
+    :init-total="total"
+    :init-seo="seo"
+  />
+</template>
+
+<script setup>
+import useInitCatalog from '@/components/Catalog/hooks/useInitCatalog'
+import useCatalogHead from '@/components/Catalog/hooks/useCatalogHead'
+
+definePageMeta({
+  middleware: 'city',
+})
+
+const initData = {
+  transportType: { code: 'cars', name: '' },
+  condition: { code: 'used', name: '' },
+  mark: { code: 'audi', name: '' },
+  extColorGroup: { code: 'black', name: '' },
+}
+
+const { seo, total, cards, holdingName, location } = await useInitCatalog({ initData })
+const seoDefault = {
+  title: `Купить Audi чёрного цвета с пробегом в ${location}, цены на чёрные Ауди – ${holdingName}`,
+  description: `Цены на чёрные Audi с пробегом в ${location}. Продажа подержанных Ауди чёрного цвета. Автомобили на привлекательных условиях в кредит с гарантией в ${holdingName}`,
+}
+const catalogHead = useCatalogHead(seoDefault, seo)
+
+useHeadDefault(catalogHead)
+</script>
